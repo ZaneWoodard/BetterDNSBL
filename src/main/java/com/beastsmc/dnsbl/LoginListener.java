@@ -1,6 +1,5 @@
 package com.beastsmc.dnsbl;
 
-import org.apache.commons.net.whois.WhoisClient;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -25,25 +24,7 @@ public class LoginListener implements Listener {
 					return;
 				}
 			} else {
-				WhoisClient whois = new WhoisClient();
-				try {
-					whois.connect("whois.arin.net");
-					String[] data = whois.query(ip).split("\n");
-					for(String line : data) {
-						if(line.startsWith("OrgName")) {
-							String isp = line.replaceFirst("OrgName: *", "");
-							if(plugin.bannedISPs.contains(isp)) {
-								e.disallow(Result.KICK_OTHER, "IP banned for being a proxy! Mistake? Contact beastsmc@gmail.com");
-								plugin.ipCache.put(ip, false);
-							} else {
-								plugin.ipCache.put(ip, true);
-							}
-						}
-					}
-				} catch (Exception e1) {
-					//If any exception happens, just let the player connect
-					return;
-				}
+				//TODO do lookup
 			}
 		}
 	}

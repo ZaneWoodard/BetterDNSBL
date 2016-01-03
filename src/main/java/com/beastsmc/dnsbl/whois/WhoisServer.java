@@ -1,4 +1,4 @@
-package com.BeastsMC.dnsbl.whois;
+package com.beastsmc.dnsbl.whois;
 
 public enum WhoisServer {
 	

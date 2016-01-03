@@ -1,4 +1,4 @@
-package com.BeastsMC.dnsbl;
+package com.beastsmc.dnsbl;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.BeastsMC.dnsbl.whois.WhoisServer;
+import com.beastsmc.dnsbl.whois.WhoisServer;
 
 public class BetterDNSBL extends JavaPlugin {
 	public HashMap<String, Boolean> ipCache;

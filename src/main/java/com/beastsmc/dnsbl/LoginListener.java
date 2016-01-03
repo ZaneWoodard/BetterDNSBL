@@ -1,4 +1,4 @@
-package com.BeastsMC.dnsbl;
+package com.beastsmc.dnsbl;
 
 import org.apache.commons.net.whois.WhoisClient;
 import org.bukkit.event.EventHandler;

@@ -126,7 +126,7 @@ public class NTFTPEntryParser extends ConfigurableFTPFileEntryParserImpl
                 }
             }
 
-            if (null == name || name.equals(".") || name.equals(".."))
+            if (null == name || name.equals(".") || name.equals("src/main"))
             {
                 return (null);
             }

@@ -1,0 +1,8 @@
+name: BetterDNSBL
+main: com.BeastsMC.dnsbl.BetterDNSBL
+version: 1.0
+commands:
+   dnsbl:
+      usage: /worldcreate reload
+      permission: beastsmc.admin
+      permission-message: You do not have permission to use this command!

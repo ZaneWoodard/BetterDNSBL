@@ -1,0 +1,12 @@
+username-bypass: {}
+banned-isps:
+  - 'SECURED SERVERS LLC'
+  - 'FDCservers.net'
+  - 'SoftLayer Technologies Inc.'
+  - 'ORG-VS46-RIPE'
+  - 'NOC4Hosts Inc.'
+  - 'AnchorFree Inc.'
+  - 'Voxility LLC'
+  - 'Amazon Technologies Inc.'
+  - 'Ace Data Centers, Inc.'
+  - 'QuadraNet, Inc'

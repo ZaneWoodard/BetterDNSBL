@@ -1,5 +1,5 @@
 name: BetterDNSBL
-main: com.BeastsMC.dnsbl.BetterDNSBL
+main: com.beastsmc.dnsbl.BetterDNSBL
 version: 1.0
 commands:
    dnsbl:

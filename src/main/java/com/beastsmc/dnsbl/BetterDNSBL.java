@@ -1,6 +1,7 @@
 package com.beastsmc.dnsbl;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -13,9 +14,9 @@ public class BetterDNSBL extends JavaPlugin {
 	public ASNLookup asnLookup;
 
 	public void onEnable() {
-		ipCache = new HashMap<String, Boolean>();
+		ipCache = new HashMap<>();
 		bannedISPs = new ArrayList<>();
-		usernameBypass = new HashSet<String>();
+		usernameBypass = new HashSet<>();
 		loadData();
 		getServer().getPluginManager().registerEvents(new LoginListener(this), this);
 		getCommand("dnsbl").setExecutor(this);
@@ -23,12 +24,8 @@ public class BetterDNSBL extends JavaPlugin {
 	
 	private void loadData() {
 		saveDefaultConfig();
-		for(String name : getConfig().getStringList("username-bypass")) {
-			usernameBypass.add(name);
-		}
-		for(String isp : getConfig().getStringList("banned-isps")) {
-			bannedISPs.add(isp);
-		}
+        usernameBypass.addAll(getConfig().getStringList("username-bypass").stream().collect(Collectors.toList()));
+        bannedISPs.addAll(getConfig().getStringList("banned-isps").stream().collect(Collectors.toList()));
 
 		asnLookup = new ASNLookup(this.getDataFolder());
 	}

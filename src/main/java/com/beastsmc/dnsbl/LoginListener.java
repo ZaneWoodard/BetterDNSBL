@@ -8,6 +8,7 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result;
 
 public class LoginListener implements Listener {
 	private final BetterDNSBL plugin;
+    private final String DISALLOW_MESSAGE = "IP banned for being a proxy! Mistake? Contact beastsmc@gmail.com";
 	public LoginListener(BetterDNSBL main) {
 		this.plugin = main;
 	}
@@ -16,23 +17,24 @@ public class LoginListener implements Listener {
 	public void filterLogins(AsyncPlayerPreLoginEvent e) {
 		if(e.getLoginResult()==Result.ALLOWED) {
 			if(plugin.usernameBypass.contains(e.getName())) return;
+
+
 			String ip = e.getAddress().getHostAddress();
-			if(plugin.ipCache.containsKey(ip)) {
-				boolean cachedAllow = plugin.ipCache.get(ip);
-				if(!cachedAllow) {
-					e.disallow(Result.KICK_OTHER, "IP banned for being a proxy! Mistake? Contact beastsmc@gmail.com");
-				} else {
-					return;
-				}
-			} else {
+            Boolean cachedAllow = plugin.ipCache.get(ip);
+
+            if(cachedAllow!=null) {
+                if(!cachedAllow) {
+                    e.disallow(Result.KICK_OTHER, DISALLOW_MESSAGE);
+                }
+            } else {
                 String org = plugin.asnLookup.lookup(ip);
-                if(plugin.isOrgBanned(org)) {
-                    e.disallow(Result.KICK_OTHER, "IP banned for being a proxy! Mistake? Contact beastsmc@gmail.com");
+                if (plugin.isOrgBanned(org)) {
+                    e.disallow(Result.KICK_OTHER, DISALLOW_MESSAGE);
                     plugin.ipCache.put(ip, false);
                 } else {
                     plugin.ipCache.put(ip, true);
                 }
-			}
+            }
 		}
 	}
 }

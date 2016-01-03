@@ -20,10 +20,10 @@ public class ASNLookup {
     }
 
     /**
-     * Look what organization an ISP belongs to.
+     * Look what organization an IP belongs to.
      * Benchmarked to ~100,000 queries/sec
-     * @param ip
-     * @return
+     * @param ip The IPv4 address to search for
+     * @return string - the name of the organization ip belongs to
      */
     public String lookup(String ip) {
         return asnl.getOrg(ip);

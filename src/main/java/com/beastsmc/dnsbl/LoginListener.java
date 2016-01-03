@@ -11,6 +11,7 @@ public class LoginListener implements Listener {
 	public LoginListener(BetterDNSBL main) {
 		this.plugin = main;
 	}
+
 	@EventHandler(priority=EventPriority.LOWEST, ignoreCancelled=true)
 	public void filterLogins(AsyncPlayerPreLoginEvent e) {
 		if(e.getLoginResult()==Result.ALLOWED) {
@@ -24,7 +25,13 @@ public class LoginListener implements Listener {
 					return;
 				}
 			} else {
-				//TODO do lookup
+                String org = plugin.asnLookup.lookup(ip);
+                if(plugin.isOrgBanned(org)) {
+                    e.disallow(Result.KICK_OTHER, "IP banned for being a proxy! Mistake? Contact beastsmc@gmail.com");
+                    plugin.ipCache.put(ip, false);
+                } else {
+                    plugin.ipCache.put(ip, true);
+                }
 			}
 		}
 	}

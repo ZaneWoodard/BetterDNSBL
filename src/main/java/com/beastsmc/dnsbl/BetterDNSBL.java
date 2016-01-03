@@ -1,7 +1,6 @@
 package com.beastsmc.dnsbl;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -9,11 +8,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class BetterDNSBL extends JavaPlugin {
 	public HashMap<String, Boolean> ipCache;
-	public HashSet<String> bannedISPs;
+	public List<String> bannedISPs;
 	public HashSet<String> usernameBypass;
+	public ASNLookup asnLookup;
+
 	public void onEnable() {
 		ipCache = new HashMap<String, Boolean>();
-		bannedISPs = new HashSet<String>();
+		bannedISPs = new ArrayList<>();
 		usernameBypass = new HashSet<String>();
 		loadData();
 		getServer().getPluginManager().registerEvents(new LoginListener(this), this);
@@ -28,6 +29,8 @@ public class BetterDNSBL extends JavaPlugin {
 		for(String isp : getConfig().getStringList("banned-isps")) {
 			bannedISPs.add(isp);
 		}
+
+		asnLookup = new ASNLookup(this.getDataFolder());
 	}
 
 	
@@ -42,4 +45,19 @@ public class BetterDNSBL extends JavaPlugin {
 		}
 		return false;
 	}
+
+    public boolean isOrgBanned(String org) {
+        /* List defined in config.yml may contain partial names
+         * We must check to see if org contains ANY entries from black list
+         */
+        boolean bad = false;
+        for(String needle : bannedISPs) {
+            if(org.contains(needle)) {
+                bad = true;
+                break;
+            }
+        }
+
+        return bad;
+    }
 }

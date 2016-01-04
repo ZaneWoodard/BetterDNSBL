@@ -18,8 +18,6 @@ public class BetterDNSBL extends JavaPlugin {
 
 	public void onEnable() {
 		ipCache = new HashMap<>();
-		bannedISPs = new ArrayList<>();
-		usernameBypass = new HashSet<>();
 		loadData();
 		getServer().getPluginManager().registerEvents(new LoginListener(this), this);
 		getCommand("dnsbl").setExecutor(this);
@@ -27,9 +25,10 @@ public class BetterDNSBL extends JavaPlugin {
 	
 	private void loadData() {
 		saveDefaultConfig();
+		usernameBypass = new HashSet<>();
+		bannedISPs = new ArrayList<>();
         usernameBypass.addAll(getConfig().getStringList("username-bypass").stream().collect(Collectors.toList()));
         bannedISPs.addAll(getConfig().getStringList("banned-isps").stream().collect(Collectors.toList()));
-
 		asnLookup = new ASNLookup(this.getDataFolder());
 	}
 

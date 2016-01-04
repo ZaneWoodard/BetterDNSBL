@@ -59,7 +59,7 @@
                             <minimizeJar>true</minimizeJar>
                             <artifactSet>
                                 <includes>
-                                    <include>com.maxmind.geoip.LookupService</include>
+                                    <include>com.maxmind.geoip:*</include>
                                 </includes>
                             </artifactSet>
                             <relocations>

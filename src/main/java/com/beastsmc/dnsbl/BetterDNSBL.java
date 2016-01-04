@@ -1,11 +1,14 @@
 package com.beastsmc.dnsbl;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BetterDNSBL extends JavaPlugin {
 	public HashMap<String, Boolean> ipCache;

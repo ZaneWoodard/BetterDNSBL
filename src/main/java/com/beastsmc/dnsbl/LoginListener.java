@@ -28,7 +28,9 @@ public class LoginListener implements Listener {
                 }
             } else {
                 String org = plugin.asnLookup.lookup(ip);
-                if (plugin.isOrgBanned(org)) {
+                if(org==null) {
+                    plugin.getLogger().warning("No ASN found for " + ip + ", skipping validation");
+                } else if (plugin.isOrgBanned(org)) {
                     e.disallow(Result.KICK_OTHER, DISALLOW_MESSAGE);
                     plugin.ipCache.put(ip, false);
                 } else {
